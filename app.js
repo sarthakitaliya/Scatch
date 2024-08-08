@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const engine = require("ejs-mate");
+const indexRouter = require("./routes/indexRoute");
 
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -11,7 +12,6 @@ app.engine("ejs", engine)
 
 app.listen(3000);
 
-app.get("/a", (req, res) => {
-    res.render("user/shop.ejs")
-})
+//Routes
+app.use("/", indexRouter);
 

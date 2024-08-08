@@ -12,8 +12,25 @@
 </head>
 <body>
     <body>
-        <%- include("../includes/navbar.ejs") %>
-        <%- body %>
+        <nav>
+            <div class="logo">
+                <h1>Scatch</h1>
+            </div>
+        </nav>
+        <hr>
+        <div class="login-container-flex">
+            <div class="login-container">
+                <h1>Login your account</h1>
+                <form action="/shop">
+                    <input type="email" placeholder="email">
+                    <br>
+                    <input type="password" placeholder="Password">
+                    <br>
+                    <button>Login</button>
+                </form>
+                <a href="/signup">New to <span>Scatch</span>? Create an account</a>
+            </div>
+        </div>
     </body>
 </body>
 </html>
