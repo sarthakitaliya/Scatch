@@ -12,6 +12,7 @@
 </head>
 <body>
     <body>
+        <%- include("../includes/flash.ejs") %>
         <nav>
             <div class="logo">
                 <h1>Scatch</h1>
@@ -21,16 +22,17 @@
         <div class="login-container-flex">
             <div class="login-container">
                 <h1>Login your account</h1>
-                <form action="/shop">
-                    <input type="email" placeholder="email">
+                <form action="/login" method="post">
+                    <input type="text" placeholder="username" name="username">
                     <br>
-                    <input type="password" placeholder="Password">
+                    <input type="password" placeholder="Password" name="password">
                     <br>
                     <button>Login</button>
                 </form>
                 <a href="/signup">New to <span>Scatch</span>? Create an account</a>
             </div>
         </div>
+        <script src="./js/alert.js"></script>    
     </body>
 </body>
 </html>

@@ -36,8 +36,12 @@
     </div>
     <div class="links">
         <a href="#"><h3>Cart</h3></a> 
-        <a href="#"><h3>Login</h3></a>
-        <a href="#"><h3>Signup</h3></a>  
+        <% if(!currUser){ %>
+            <a href="/login"><h3>Login</h3></a>
+            <a href="/signup"><h3>Signup</h3></a>  
+        <% }else { %>
+            <a href="/logout"><h3>Logout</h3></a>  
+        <% } %>
     </div>
 </nav>
 <hr>

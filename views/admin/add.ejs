@@ -1,0 +1,53 @@
+<% layout("/layouts/adminBoilerplate") %>
+<body>
+    <div class="admin-container">
+        <div class="admin-flex">
+            <div class="admin-left">
+                <div class="admin-left-flex">
+                    <div class="admin-left-sub">
+                        <img src="/images/add_icon.png" alt="">
+                        <a href="/admin/add">Add items</a>
+                    </div>
+                    <div class="admin-left-sub">
+                        <img src="/images/order_icon.png" alt="">
+                        <a href="/admin/list">List items</a>
+                    </div>
+                    <div class="admin-left-sub">
+                        <img src="/images/order_icon.png" alt="">
+                        <a href="/admin/orders">Orders</a>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-right">
+                <div class="admin-right-container">
+                    <h2>Create New Product</h2>
+                    <br>
+                    <hr>
+                    <div class="product-form">
+                        <form action="">
+                            <div class="form-file">
+                                <h3>Product Image</h3>
+                                <label for="productImage">Select File</label>
+                                <input type="file" id="productImage" name="img" style="display: none;">
+                            </div>
+                            <br>
+                            <br>
+                            <input type="text" placeholder="Product Name" class="pn">
+                            <br>
+                            <input type="text" placeholder="Product Price" class="pp">
+                            <input type="text" placeholder="Discount" class="pd">
+                            <div class="panel-details">
+                                <h2>Panel Details</h2>
+                                <input type="text" placeholder="Background Color" class="pp">
+                                <input type="text" placeholder="Panel Color" class="pd">
+                                <br>
+                                <input type="text" placeholder="Text Color" class="pp">
+                            </div>
+                            <button>Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

@@ -23,6 +23,7 @@
 </head>
 <body>
     <body>
+        <%- include("../includes/flash.ejs") %>
         <nav>
             <div class="logo">
                 <h1>Scatch</h1>
@@ -34,18 +35,19 @@
                 <h1>Welcome to <span>Scatch</span></h1>
                 <h3>Create your account</h3>
                 <br>
-                <form action="/shop">
-                    <input type="text" placeholder="Full Name">
+                <form action="/signup" method="post">
+                    <input type="text" placeholder="username" name="username">
                     <br>
-                    <input type="email" placeholder="email">
+                    <input type="email" placeholder="email" name="email">
                     <br>
-                    <input type="password" placeholder="Password">
+                    <input type="password" placeholder="Password" name="password">
                     <br>
                     <button>Signup</button>
                 </form>
                 <a href="/login">Already have an account? <span>Log in</span></a>
             </div>
         </div>
+        <script src="./js/alert.js"></script>    
     </body>
 </body>
 </html>
