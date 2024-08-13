@@ -1,0 +1,54 @@
+
+    <div class="filter-sort-container">
+        <div class="sort-by">
+            <label for="sort-options">Sort By:</label>
+            <select id="sort-options">
+                <option value="best-selling">Best Selling</option>
+                <option value="newest">Newest Arrivals</option>
+                <option value="price-low-high">Price: Low to High</option>
+                <option value="price-high-low">Price: High to Low</option>
+            </select>
+        </div>
+        
+        <div class="filter-by">
+            <label for="filter-category">Filter By:</label>
+            <select id="filter-category">
+                <option value="Availability">Availability</option>
+                <option value="Discount">Discount</option>
+            </select>
+        </div>
+    </div>
+<style>
+    .filter-sort-container{
+        display: flex;
+        justify-content: space-between;
+        height: 4vw;
+        padding: 0 50px;
+        align-items: center;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .shop label{
+        font-weight: 500;
+        font-size: 1.1vw;
+    }
+    select {
+        padding: 8px 12px;
+        margin-right: 20px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        cursor: pointer;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    select:focus {
+        border-color: #007BFF;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+    }
+    select:hover {
+        border-color: #0056b3;
+    }
+    
+</style>
+    

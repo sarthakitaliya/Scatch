@@ -35,7 +35,12 @@
         <h1>Scatch</h1>
     </div>
     <div class="links">
-        <a href="#"><h3>Cart</h3></a> 
+        <% if(currUser && currUser.role == "user"){%>
+            <a href="/shop/cart"><h3>Cart</h3></a>
+        <% } %>
+        <% if(currUser && currUser.role == "admin"){ %>
+            <a href="/admin"><h3 style="color: #007BFF; font-weight: 500; font-size: 25px;">Admin panel</h3></a>    
+        <% } %> 
         <% if(!currUser){ %>
             <a href="/login"><h3>Login</h3></a>
             <a href="/signup"><h3>Signup</h3></a>  

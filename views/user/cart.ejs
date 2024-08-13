@@ -1,1 +1,85 @@
-<% layout("/layouts/boilerplate") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/stylesheet/style.css">
+    <title>Scatch</title>
+    <style>
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav a{
+            text-emphasis: none;
+            color: black;
+        }
+        nav a h3{
+            font-weight: 400;
+        }
+        .cart-container hr{
+            width: 92%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <h1>Scatch</h1>
+        </div>
+        <div class="links">
+            <a href="/shop"><h3>Home</h3></a>
+        </div>
+    </nav>
+    <hr>
+    <div class="cart-container">
+        <div class="cart-heading">
+            <h3>Items</h3>
+            <h3>Name</h3>
+            <h3>Price</h3>
+            <h3>Quantity</h3>
+            <h3>Total</h3>
+            <h3>Remove</h3>
+        </div>
+        <hr>
+        <div class="cart-items">
+            <div class="cart-img">
+                <img src="../images/image_80.png" alt="">
+            </div>
+            <h3>Product Name</h3>
+            <h3>458</h3>
+            <div class="cart-item-margin">
+                <div class="quantity-control">
+                    <form action="/cart/update/" method="POST">
+                        <button type="submit" class="decrease-btn">-</button>
+                    </form>
+                    <p>1</p>
+                    <form action="/cart/update/" method="POST">
+                        <button type="submit" class="increase-btn">+</button>
+                    </form>
+                </div>
+                <h3>800</h3>
+                <form action="/admin/list" method="post">
+                    <button class="cart-x-button"><i class="fa-solid fa-xmark"></i></button>
+                </form>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="cart-bill">
+        <div class="cart-bill-one">
+            
+        </div>
+        <div class="cart-bill-two">
+
+        </div>
+    </div>
+</body>
+</html>
+

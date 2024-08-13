@@ -1,141 +1,30 @@
 <% layout("/layouts/boilerplate") %>
 
 <body>
-        <div class="shop">
-        <div class="filter-sort-container">
-            <div class="sort-by">
-                <label for="sort-options">Sort By:</label>
-                <select id="sort-options">
-                    <option value="best-selling">Best Selling</option>
-                    <option value="newest">Newest Arrivals</option>
-                    <option value="price-low-high">Price: Low to High</option>
-                    <option value="price-high-low">Price: High to Low</option>
-                </select>
-            </div>
-    
-            <div class="filter-by">
-                <label for="filter-category">Filter By:</label>
-                <select id="filter-category">
-                    <option value="Availability">Availability</option>
-                    <option value="Discount">Discount</option>
-                </select>
-            </div>
-        </div>
-    
+    <div class="shop">
         <div class="product-list">
             <div class="product-list-flex">
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/images/image_80.png" alt="">
-                    </div>
-                    <div class="product-panel">
-                        <div class="product-text">
-                            <h4>Clinge Bag</h4>
-                            <p>₹ 1200 <span class="discount">-45%</span></p>
+                <% for(let product of products){ %>
+                    <div class="product-card">
+                        <div class="product-img" style="background-color:<%= product.bgcolor %> ;">
+                            <img src="<%= product.image.url %>" alt="">
                         </div>
-                        <div class="product-cart">
-                            <form action="">
-                                <button><i class="fa-solid fa-plus"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/images/image_80.png" alt="">
-                    </div>
-                    <div class="product-panel">
-                        <div class="product-text">
-                            <h4>Clinge Bag</h4>
-                            <p>₹ 1200 <span class="discount">-45%</span></p>
-                        </div>
-                        <div class="product-cart">
-                            <form action="">
-                                <button><i class="fa-solid fa-plus"></i></button>
-                            </form>
+                        <div class="product-panel" style="background-color:<%= product.panelcolor %> ;">
+                            <div class="product-text"  style="color:<%= product.textcolor%> ;">
+                                <h4><%= product.productname %></h4>
+                                <p>₹ <%= product.price %> 
+                                <% if(product.discount !== 0){ %>
+                                    <span class="discount">-<%= product.discount %>%</span></p>
+                                <% } %>
+                            </div>
+                            <div class="product-cart">
+                                <form action="">
+                                    <button><i class="fa-solid fa-plus"></i></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/images/image_80.png" alt="">
-                    </div>
-                    <div class="product-panel">
-                        <div class="product-text">
-                            <h4>Clinge Bag</h4>
-                            <p>₹ 1200 <span class="discount">-45%</span></p>
-                        </div>
-                        <div class="product-cart">
-                            <form action="">
-                                <button><i class="fa-solid fa-plus"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/images/image_80.png" alt="">
-                    </div>
-                    <div class="product-panel">
-                        <div class="product-text">
-                            <h4>Clinge Bag</h4>
-                            <p>₹ 1200 <span class="discount">-45%</span></p>
-                        </div>
-                        <div class="product-cart">
-                            <form action="">
-                                <button><i class="fa-solid fa-plus"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/images/image_80.png" alt="">
-                    </div>
-                    <div class="product-panel">
-                        <div class="product-text">
-                            <h4>Clinge Bag</h4>
-                            <p>₹ 1200 <span class="discount">-45%</span></p>
-                        </div>
-                        <div class="product-cart">
-                            <form action="">
-                                <button><i class="fa-solid fa-plus"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/images/image_80.png" alt="">
-                    </div>
-                    <div class="product-panel">
-                        <div class="product-text">
-                            <h4>Clinge Bag</h4>
-                            <p>₹ 1200 <span class="discount">-45%</span></p>
-                        </div>
-                        <div class="product-cart">
-                            <form action="">
-                                <button><i class="fa-solid fa-plus"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="/images/image_80.png" alt="">
-                    </div>
-                    <div class="product-panel">
-                        <div class="product-text">
-                            <h4>Clinge Bag</h4>
-                            <p>₹ 1200 <span class="discount">-45%</span></p>
-                        </div>
-                        <div class="product-cart">
-                            <form action="">
-                                <button><i class="fa-solid fa-plus"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <% } %>      
             </div>
         </div>
     </div>

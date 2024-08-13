@@ -19,7 +19,43 @@
                 </div>
             </div>
             <div class="admin-right">
-                
+                <div class="list-heading">
+                    <h2>Product List</h2>   
+                </div>
+                <div class="list-table-container">
+                    <div class="list-table-heading">
+                        <div class="list-table-one">
+                            <h4>Image</h4>
+                            <h4>Name</h4>
+                        </div>
+                        <div class="list-table-two">
+                            <h4>Price</h4>
+                            <h4>Discount</h4>
+                            <h4>Action</h4>
+                        </div>
+                    </div>
+                    <% for(let product of allProducts) { %>
+                        <div class="list-table-item">
+                            <div class="list-table-item-one">
+                                <div class="list-table-img">
+                                    <img src="<%= product.image.url %>" alt="">
+                                </div>
+                                <h4><%= product.productname %></h4>
+                            </div>                            
+                            <div class="list-table-item-two">
+                                <h4><%= product.price %></h4>
+                                <% if(product.discount == ""){ %>
+                                    <h4>0</h4>
+                                <% }else{ %>
+                                    <h4><%= product.discount %></h4>
+                                <% } %>    
+                                <form action="/admin/list/<%= product._id %>?_method=DELETE" method="post">
+                                    <button><i class="fa-solid fa-xmark"></i></button>
+                                </form>
+                            </div>                            
+                        </div>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>

@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV != "production"){
+    require('dotenv').config();
+}
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -5,14 +8,20 @@ const engine = require("ejs-mate");
 const mongoose = require("mongoose")
 const indexRouter = require("./routes/indexRoute");
 const adminRouter = require("./routes/adminRouter");
+const userRouter = require("./routes/userRouter");
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const flash = require("connect-flash"); 
 const userModel = require("./models/userModel")
+const multer = require("multer");
+const ExpressError = require('./utils/ExpressError');
+const methodOverride = require('method-override');
+
 
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+app.use(methodOverride('_method'));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.engine("ejs", engine)
@@ -46,6 +55,7 @@ app.use((req, res, next) => {
 //Routes
 app.use("/", indexRouter);
 app.use("/admin", adminRouter);
+app.use("/shop", userRouter);
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/scatch";
 // const dburl = process.env.ATLASDB_URL;
@@ -60,4 +70,12 @@ async function main(){
     await mongoose.connect(MONGO_URL);
 }
 
+app.all("*", (req, res, next) => {    
+    next(new ExpressError(404, "Page not Found"))
+})
+
+app.use((err, req, res, next) => {
+    let {status=500, message="Something went wrong"} = err;
+    res.status(status).render("error", {message, status});
+})
 
