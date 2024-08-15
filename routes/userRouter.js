@@ -71,8 +71,8 @@ router.post("/cart/checkout", isLoggedIn, wrapAsync(async(req, res) => {
     const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
         mode: 'payment',
-        success_url: `${process.env.BASE_URL}/confirm`,
-        cancel_url: `${process.env.BASE_URL}/failed`,
+        success_url: '/confirm',
+        cancel_url: '/failed',
     })
     
     res.redirect(session.url);

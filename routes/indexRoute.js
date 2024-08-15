@@ -5,6 +5,9 @@ const passport = require("passport");
 const wrapAsync = require("../utils/wrapAsync");
 const { isLoggedIn } = require("../middleware");
 
+router.get('/', (req, res) => {
+    res.redirect('/shop');
+});
 router.get("/login", (req, res) => {
     res.render("user/login.ejs")
 })
