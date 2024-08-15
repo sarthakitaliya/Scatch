@@ -26,9 +26,29 @@
             width: 92%;
             margin: 0 auto;
         }
+        @media (max-width:920px) {
+            nav .logo h1{
+                font-size: 5vw;
+            }
+            .links a h3{
+                font-size: 3vw;
+            }
+        }
+        @media (max-width:520px) {
+            nav .logo h1{
+                font-size: 6vw;
+            }
+            .links a h3{
+                font-size: 4vw;
+            }
+            nav{
+                padding: 15px 30px;
+            }
+        }
     </style>
 </head>
 <body>
+    <%- include("../includes/flash.ejs") %> 
     <nav>
         <div class="logo">
             <h1>Scatch</h1>
@@ -39,47 +59,140 @@
     </nav>
     <hr>
     <div class="cart-container">
-        <div class="cart-heading">
-            <h3>Items</h3>
-            <h3>Name</h3>
-            <h3>Price</h3>
-            <h3>Quantity</h3>
-            <h3>Total</h3>
-            <h3>Remove</h3>
-        </div>
-        <hr>
-        <div class="cart-items">
-            <div class="cart-img">
-                <img src="../images/image_80.png" alt="">
+        <% if(cart.length == 0){ %>
+            <div class="empty-cart">
+                <p>Your cart is empty. Please add some products to your cart.</p>
+                <a href="/shop"><button>Shop Now</button></a>
             </div>
-            <h3>Product Name</h3>
-            <h3>458</h3>
-            <div class="cart-item-margin">
-                <div class="quantity-control">
-                    <form action="/cart/update/" method="POST">
-                        <button type="submit" class="decrease-btn">-</button>
-                    </form>
-                    <p>1</p>
-                    <form action="/cart/update/" method="POST">
-                        <button type="submit" class="increase-btn">+</button>
+        <% }else{ %>
+            <div class="cart-heading">
+                <h3>Items</h3>
+                <h3>Name</h3>
+                <h3>Price</h3>
+                <h3 class="cart-h-q">Quantity</h3>
+                <h3 class="cart-h-t">Total</h3>
+                <h3>Remove</h3>
+            </div>
+            <hr>
+            <% for(let cartItem of cart){ %>
+                <div class="cart-items">
+                    <div class="cart-img">
+                        <img src="<%= cartItem.productId.image.url %>" alt="">
+                    </div>
+                    <h3 class="p-name"><%= cartItem.productId.productname%></h3>
+                    <h3 class="cart-price">₹<%= cartItem.productId.price%></h3>
+                 
+                        <div class="quantity-control">
+                            
+                            <form action="/shop/cart/update" method="post">
+                                <input type="hidden" name="productId" value="<%= cartItem.productId._id %>">
+                                <input type="hidden" name="action" value="decrease">
+                                <button type="submit" class="decrease-btn"<% if(cartItem.quantity == 1){ %> disabled style="cursor: not-allowed;" <% } %>>-</button>
+                            </form>
+                            <p><%= cartItem.quantity%></p>
+                            <form action="/shop/cart/update/" method="post">
+                                <input type="hidden" name="productId" value="<%= cartItem.productId._id %>">
+                                <input type="hidden" name="action" value="increase">
+                                <button type="submit" class="increase-btn">+</button>
+                            </form>
+                        </div>
+                        <h3>₹<%= cartItem.productId.price * cartItem.quantity%></h3>
+                        <form action="/shop/cart/remove/<%= cartItem.productId._id%>" method="post">
+                            <button class="cart-x-button"><i class="fa-solid fa-xmark"></i></button>
+                        </form>
+                    
+                </div>
+                <hr>
+            <% } %>
+        <% } %>
+    </div>
+    <div class="cart-container-mobile">
+        <% if(cart.length == 0){ %>
+            <div class="empty-cart empty-m">
+                <p>Your cart is empty. Please add some products to your cart.</p>
+                <a href="/shop"><button>Shop Now</button></a>
+            </div>
+        <% }else{ %>
+            <div class="cart-main-m">
+                <% for(let cartItem of cart){ %>
+                    <div class="cart-products-m">
+                        <div class="cart-img-m">
+                            <img src="<%= cartItem.productId.image.url %>" alt="">    
+                        </div>
+                        <div class="cart-items-m">
+                            <div class="cart-items-sub-m">
+                                <h3><%= cartItem.productId.productname%></h3>
+                                <div class="quantity-control-m">
+                            
+                                    <form action="/shop/cart/update" method="post">
+                                        <input type="hidden" name="productId" value="<%= cartItem.productId._id %>">
+                                        <input type="hidden" name="action" value="decrease">
+                                        <button type="submit" class="decrease-btn">-</button>
+                                    </form>
+                                    <p><%= cartItem.quantity%></p>
+                                    <form action="/shop/cart/update/" method="post">
+                                        <input type="hidden" name="productId" value="<%= cartItem.productId._id %>">
+                                        <input type="hidden" name="action" value="increase">
+                                        <button type="submit" class="increase-btn">+</button>
+                                    </form>
+                                </div>
+                                <div class="cart-price-m">
+                                    <h3 class="cart-original-price-m">₹<%= cartItem.productId.price%></h3>
+                                    <h3 class="cart-total-price-m">₹<%= cartItem.productId.price * cartItem.quantity%></h3>
+                                </div>
+                                <form action="/shop/cart/remove/<%= cartItem.productId._id%>" method="post">
+                                    <button class="cart-remove-m">Remove</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <% } %>
+            </div>
+        <% } %>
+    </div>
+    <% if(cart.length !== 0){ %>
+        <% let finalTotal = 0; %>
+        <% for(let cartItem of cart){ %>
+            <% finalTotal += cartItem.productId.price * cartItem.quantity; %>
+        <% } %>
+        <div class="cart-wrap">
+            <div class="cart-bill">
+                <div class="cart-bill-one">
+                    <h1>Cart Total</h1>
+                    <div class="cart-bill-title">
+                        <div class="cart-bill-sub">
+                            <h4>Subtotal</h4>
+                            <h4>₹<%= finalTotal %></h4>
+                        </div>
+                        <hr>
+                        <div class="cart-bill-sub">
+                            <h4>Delivery Fee</h4>
+                            <h4>Free</h4>
+                        </div>
+                        <hr>
+                        <div class="cart-bill-sub">
+                            <h4 class="final-total">Total</h4>
+                            <h4 class="final-total">₹<%= finalTotal %></h4>
+                        </div>
+                    </div>
+                    <form action="/shop/cart/checkout" method="post">
+                        <button class="checkout-button">PROCEED TO CHECKOUT</button>
                     </form>
                 </div>
-                <h3>800</h3>
-                <form action="/admin/list" method="post">
-                    <button class="cart-x-button"><i class="fa-solid fa-xmark"></i></button>
-                </form>
+                <div class="cart-bill-two">
+                    <div class="cart-promo">
+                        <h3>If you have a promo code,Enter it here</h3>
+                        <form action="/shop/cart/promo">
+                            <input type="text" placeholder="Promo code">
+                            <button>Submit</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        <hr>
-    </div>
-    <div class="cart-bill">
-        <div class="cart-bill-one">
-            
-        </div>
-        <div class="cart-bill-two">
-
-        </div>
-    </div>
+    <% } %>
+    <script src="/js/alert.js"></script>   
 </body>
 </html>
 

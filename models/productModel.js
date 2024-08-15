@@ -22,7 +22,7 @@ const productSchema = mongoose.Schema({
 
 productSchema.post('findOneAndDelete', async function (product) {
     if (product) {
-        // Remove the product from all admins' products array
+
         await userModel.updateMany(
             { role: 'admin' },
             { $pull: { products: product._id } }

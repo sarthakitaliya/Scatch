@@ -3,6 +3,7 @@ const router = express.Router();
 const userModel = require("../models/userModel");
 const passport = require("passport");
 const wrapAsync = require("../utils/wrapAsync");
+const { isLoggedIn } = require("../middleware");
 
 router.get("/login", (req, res) => {
     res.render("user/login.ejs")
@@ -34,7 +35,7 @@ router.post("/signup", wrapAsync(async (req, res, next) => {
    }
 }));
 
-router.get("/logout", (req, res) => {
+router.get("/logout", isLoggedIn, (req, res) => {
     req.logout((err) => {
         if(err){
             return next(err);
@@ -43,5 +44,18 @@ router.get("/logout", (req, res) => {
         res.redirect("/shop");
     });
 });
+
+//Payment status
+router.get("/confirm", isLoggedIn, wrapAsync(async(req, res) => {
+    const user = await userModel.findById(req.user._id);    
+    user.cart = []; 
+    await user.save();
+    req.flash("success", "Your payment was successful!");
+    res.redirect("/shop");
+}));
+router.get("/failed", isLoggedIn, (req, res) => {
+    req.flash("error", "Payment was declined. Please try again.");
+    res.redirect("/shop/cart");
+})
 
 module.exports = router;
