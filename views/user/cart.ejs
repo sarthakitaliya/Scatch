@@ -127,7 +127,7 @@
                                     <form action="/shop/cart/update" method="post">
                                         <input type="hidden" name="productId" value="<%= cartItem.productId._id %>">
                                         <input type="hidden" name="action" value="decrease">
-                                        <button type="submit" class="decrease-btn">-</button>
+                                        <button type="submit" class="decrease-btn"<% if(cartItem.quantity == 1){ %> disabled style="cursor: not-allowed;" <% } %>>-</button>
                                     </form>
                                     <p><%= cartItem.quantity%></p>
                                     <form action="/shop/cart/update/" method="post">

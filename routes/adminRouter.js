@@ -22,7 +22,6 @@ router.post("/add", isAdmin, upload.single('image'), wrapAsync( async (req, res)
         throw new ExpressError(400, result.error)
     }
     let {productname, price, discount, bgcolor, panelcolor, textcolor} = req.body;
-    req.flash("success", "Product added");
     let url = req.file.url;
     let filename = req.file.public_id;
     let newProduct = new productModel({
@@ -40,6 +39,7 @@ router.post("/add", isAdmin, upload.single('image'), wrapAsync( async (req, res)
     admin.products.push(newProduct._id);
     await admin.save();
     
+    req.flash("success", "Product added");
     res.redirect("/admin/list");
 }))
 router.get("/list", isAdmin, wrapAsync(async (req, res) => {

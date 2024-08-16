@@ -24,24 +24,45 @@
                     <br>
                     <hr>
                     <div class="product-form">
-                        <form action="/admin/add" method="post" enctype="multipart/form-data">
-                            <div class="form-file">
+                        <form action="/admin/add" method="post" enctype="multipart/form-data" id="form">
+                            <div class="form-file input-control" style="position: relative;">
                                 <h3>Product Image</h3>
                                 <label for="productImage">Select File</label>
-                                <input type="file" id="productImage" name="image">
+                                <input type="file" id="productImage" name="image" id="productImage">
+                                <div class="error" style="position: absolute; top: 100%;"></div>
                             </div>
                             <br>
                             <br>
-                            <input type="text" placeholder="Product Name" class="pn" name="productname">
+                            <div class="input-control">
+                                <input type="text" placeholder="Product Name" class="pn" name="productname" id="productname">
+                            <div class="error"></div>
+                            </div>
                             <br>
-                            <input type="text" placeholder="Product Price" class="pp" name="price">
-                            <input type="text" placeholder="Discount" class="pd" name="discount" value="0">
+                            <div class="product-price" style="display: flex;">
+                                <div class="input-control">
+                                    <input type="text" placeholder="Product Price" class="pp" name="price" id="productprice">
+                                    <div class="error"></div>
+                                </div>
+                                <div class="input-control">
+                                    <input type="text" placeholder="Discount" class="pd" name="discount" id="dicount">
+                                    <div class="error"></div>
+                                </div>
+                            </div>
                             <div class="panel-details">
                                 <h2>Panel Details</h2>
-                                <input type="text" placeholder="Background Color" class="pp" name="bgcolor">
-                                <input type="text" placeholder="Panel Color" class="pd" name="panelcolor">
-                                <br>
-                                <input type="text" placeholder="Text Color" class="pp" name="textcolor">
+                                <p>Enter color codes in hexadecimal format (e.g., #F3F8FB).</p>
+                                <div class="input-control">
+                                    <input type="text" placeholder="Background Color" class="pp" name="bgcolor" id="bgcolor">
+                                    <div class="error"></div>
+                                </div>
+                                <div class="input-control">
+                                    <input type="text" placeholder="Panel Color" class="pd" name="panelcolor" id="panelcolor">
+                                    <div class="error"></div>
+                                </div>
+                                <div class="input-control">
+                                    <input type="text" placeholder="Text Color" class="pp" name="textcolor" id="textcolor">
+                                    <div class="error"></div>
+                                </div>
                             </div>
                             <button>Add</button>
                         </form>
@@ -50,4 +71,5 @@
             </div>
         </div>
     </div>
+    <script src="/js/add.js"></script>
 </body>

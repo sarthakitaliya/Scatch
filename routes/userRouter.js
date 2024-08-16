@@ -4,6 +4,8 @@ const wrapAsync = require("../utils/wrapAsync");
 const productModel = require("../models/productModel.js");
 const { isLoggedIn } = require("../middleware");
 const userModel = require("../models/userModel");
+const path = require("path");
+const { model } = require("mongoose");
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 router.get("/", wrapAsync(async (req, res) => {
@@ -29,6 +31,18 @@ router.post('/cart/update', isLoggedIn, wrapAsync(async (req, res) => {
     await user.save();
     res.redirect('/shop/cart');
 }));
+router.get("/orders", isLoggedIn, async(req, res) => {
+    const user = await userModel.findById(req.user._id)
+    .populate({
+        path: 'orders',
+        populate:{
+            path:'products.product',
+            model:'product'
+        }
+    });
+    res.render("user/orders.ejs", {user});
+    // res.send(user);
+})
 router.get("/:id", isLoggedIn, wrapAsync( async(req, res) => {
     let userId = req.user.id;
     let productId = req.params.id;
@@ -71,12 +85,13 @@ router.post("/cart/checkout", isLoggedIn, wrapAsync(async(req, res) => {
     const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
         mode: 'payment',
-        success_url: `${process.env.BASE_URL}/confirm`,
+        success_url: `${process.env.BASE_URL}`,
         cancel_url: `${process.env.BASE_URL}/failed`,
     })
     
     res.redirect(session.url);
 }));
+
 
 
 
