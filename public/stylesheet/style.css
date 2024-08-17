@@ -150,7 +150,7 @@ nav{
 .login-container{
     margin-top: 60px;
     height: 500px;
-    width: 500px;
+    width: auto;
     border: 1px solid rgba(99, 99, 99, 0.452);
     box-shadow: 1px 1px 4px rgba(61, 61, 61, 0.454);
     padding: 20px 50px;

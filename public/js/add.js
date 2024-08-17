@@ -10,7 +10,6 @@ const fileInput = document.getElementById('productImage');
 form.addEventListener('submit', e => {
     e.preventDefault();
 
-    // If validation passes, submit the form
     if (validateInputs()) {
         form.submit();
     }

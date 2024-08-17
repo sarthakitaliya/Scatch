@@ -13,3 +13,8 @@ module.exports.productSchema = Joi.object({
     textcolor: Joi.string().pattern(/^#[0-9A-Fa-f]{6}$/).message('Invalid color code. It should start with # and be followed by 3 or 6 hexadecimal characters.').required(),
 })
 
+module.exports.signupSchema = Joi.object({
+    username: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().required().min(8),
+})
