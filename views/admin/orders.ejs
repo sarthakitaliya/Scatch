@@ -1,0 +1,62 @@
+<% layout("/layouts/adminBoilerplate") %>
+<body>
+    <div class="admin-container">
+        <div class="admin-flex">
+            <div class="admin-left">
+                <div class="admin-left-flex">
+                    <div class="admin-left-sub">
+                        <img src="/images/add_icon.png" alt="">
+                        <a href="/admin/add">Add items</a>
+                    </div>
+                    <div class="admin-left-sub">
+                        <img src="/images/order_icon.png" alt="">
+                        <a href="/admin/list">List items</a>
+                    </div>
+                    <div class="admin-left-sub">
+                        <img src="/images/order_icon.png" alt="">
+                        <a href="/admin/orders">Orders</a>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-right">
+                <h1 class="order-heading-a">Order Page</h1>
+                
+                <% let hasOrders = false; %> 
+
+                <% user.forEach(u => { %>
+                    <% if (u.orders.length > 0) { %>
+                        <% hasOrders = true; %>
+                        <% u.orders.forEach(o => { %>
+                            <div class="order-container-a">
+                                <div class="order-container-flex-a">
+                                    <div class="order-item-a">
+                                        <img src="/images/parcel_icon.png" alt="">
+                                        <div class="order-name-a">
+                                            <% o.products.forEach(p => { %>
+                                                <h4><%= p.product.productname %> x <%= p.quantity %></h4>
+                                            <% }) %>
+                                        </div>
+                                    </div>
+                                    <h4>₹ <%= o.totalAmount %></h4>
+                                    <form action="/admin/orders/<%= o._id %>" method="POST">
+                                        <select name="status" onchange="this.form.submit()">
+                                            <option value="Pending" <%= o.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                            <option value="Shipped" <%= o.status === 'Shipped' ? 'selected' : '' %>>Shipped</option>
+                                            <option value="Delivered" <%= o.status === 'Delivered' ? 'selected' : '' %>>Delivered</option>
+                                            <option value="Cancelled" <%= o.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <h4 class="username"><%= u.username %></h4>
+                            </div>
+                        <% }) %>
+                    <% } %>
+                <% }) %>
+
+                <% if (!hasOrders) { %>
+                    <p>No orders found.</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>

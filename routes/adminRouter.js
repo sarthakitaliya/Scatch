@@ -8,7 +8,9 @@ const productModel = require("../models/productModel.js")
 const ExpressError = require("../utils/ExpressError.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const userModel = require("../models/userModel.js");
-const {productSchema} = require("../schema.js")
+const {productSchema} = require("../schema.js");
+const { model } = require("mongoose");
+const orderModel = require("../models/orderModel.js");
 
 router.get("/", isAdmin, (req, res) => {
     res.render("admin/dashboard");
@@ -54,5 +56,30 @@ router.delete("/list/:id", isAdmin, wrapAsync(async (req, res) => {
     res.redirect('/admin/list');
 }));
 
+router.get("/orders", wrapAsync(async(req, res) => {
+    let user = await userModel.find({role: "user"})
+    .populate({
+        path: 'orders',
+        populate:{
+            path:'products.product',
+            model:'product'
+        }
+    })
+    // res.send(user)
+    res.render("admin/orders", {user});
+}))
+router.post("/orders/:orderId", wrapAsync(async(req, res) => {
+    const {orderId} = req.params;
+    const { status } = req.body;
+    
+    const order = await orderModel.findByIdAndUpdate(orderId, {status: status});
+    
+    if (!order) {
+        req.flash("error", "Order not found.");
+        return res.redirect("/admin/orders");
+    }
+    req.flash("success", "Order status updated successfully.");
+    res.redirect("/admin/orders");
+}))
 
 module.exports = router;

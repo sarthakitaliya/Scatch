@@ -12,12 +12,12 @@
 </head>
 <body>
     <%- include("../includes/navbar.ejs") %>
+    <%- include("../includes/flash.ejs") %> 
     <div class="order-container">
         <div class="order-main">
             <h1>My Orders</h1>
             <% if (user.orders.length > 0) { %>
                 <% user.orders.forEach(order => { %>
-                    <% let total = order.totalAmount%>
                     <div class="order-item">
                         <div class="order-productname">
                         <img src="/images/parcel_icon.png" alt="">
@@ -27,7 +27,7 @@
                         <% }) %>
                         </div>
                         </div>
-                        <h4>₹ <%= total%></h4>
+                        <h4>₹ <%= order.totalAmount %></h4>
                         <div class="order-s">
                             <div class="order-status"></div>
                             <h4><%= order.status %></h4>
@@ -36,7 +36,9 @@
                     </div>
                 <% }) %>
             <% } else { %>
-                <p>No orders found.</p>
+                <div class="order-empty">
+                    <h2>No orders found</h2>
+                </div>
             <% } %>
         </div>
     </div>

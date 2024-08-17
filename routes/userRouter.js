@@ -65,6 +65,10 @@ router.get("/cart/promo", (req, res) => {
 
 router.post("/cart/checkout", isLoggedIn, wrapAsync(async(req, res) => {
     const user = await userModel.findById(req.user._id).populate('cart.productId');
+    if(!user){
+        req.flash("error", "You must have to login");
+        return res.redirect("/shop");
+    }
     if (user.cart.length === 0) {
         req.flash('error', 'Your cart is empty.');
         return res.redirect('/shop/cart');
@@ -85,7 +89,7 @@ router.post("/cart/checkout", isLoggedIn, wrapAsync(async(req, res) => {
     const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
         mode: 'payment',
-        success_url: `${process.env.BASE_URL}/confirm`,
+        success_url: `${process.env.BASE_URL}/confirm`,    
         cancel_url: `${process.env.BASE_URL}/failed`,
     })
     

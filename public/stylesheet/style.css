@@ -921,7 +921,6 @@ footer hr{
 }
 .order-main h1{
     font-weight: 400;
-    font-size: 2.5vw;
 }
 .order-main .order-item{
     display: flex;
@@ -956,4 +955,91 @@ footer hr{
     display: flex;
     align-items: center;
     gap: 20px;
+}
+.order-empty{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55vh;
+}
+.order-empty h2{
+    font-weight: 400;
+}  
+@media (max-width:1200px) {
+    .order-main{
+        padding: 20px;
+    }
+}
+@media (max-width:920px) {
+    .order-container{
+        padding: 50px 10px;
+    }
+}
+@media (max-width:560px) {
+    .order-main .order-item{
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+}
+/* Order page - admin */
+
+.order-container-a{
+    border: 2px solid rgb(147, 147, 147);
+    padding: 20px 40px;
+    margin-bottom: 30px;
+}
+.order-container-flex-a{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.order-item-a{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.username{
+    margin-left: 80px;
+    margin-top: 20px;
+}
+.order-heading-a{
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+.order-container-a h4{
+    font-weight: 500;
+}
+.order-container-flex-a{
+    select {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        background-color: #dcedff;
+        color: #333;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    select:focus {
+        border-color: #007bff;
+        outline: none;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+    
+    select option {
+        padding: 10px;
+        background-color: #fff;
+        color: #333;
+    }
+    
+    select option:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+    form:active select {
+        background-color: #007bff;
+        color: #fff;
+    }
 }
