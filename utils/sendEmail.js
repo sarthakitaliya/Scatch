@@ -11,11 +11,6 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendOrderUpdateEmail = (userEmail, orderId, newStatus) => {
-    console.log(process.env.EMAIL_PASS);
-    console.log(process.env.EMAIL_USER);
-    console.log(userEmail);
-    console.log(orderId);
-    console.log(newStatus);
     
     const mailOptions = {
         from: process.env.EMAIL_USER,

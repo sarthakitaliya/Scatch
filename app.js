@@ -18,7 +18,7 @@ const userModel = require("./models/userModel")
 const multer = require("multer");
 const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
-const dburl = process.env.ATLASDB_URL;
+const dburl = process.env.ATLASDB_URL;  
 
 
 app.use(express.urlencoded({extended: true}));
